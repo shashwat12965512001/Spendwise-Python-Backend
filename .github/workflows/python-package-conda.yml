@@ -1,0 +1,16 @@
+name: 🚀 Auto Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main  # or your actual deploy branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📡 Call Deploy Endpoint on VPS
+        run: |
+          curl -X POST http://backend.weblytechnolab.com/deploy \
+            -H "X-DEPLOY-TOKEN: ${{ secrets.DEPLOY_SECRET }}"
