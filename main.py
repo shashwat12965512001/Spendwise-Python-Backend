@@ -173,7 +173,13 @@ def get_monthly_budget():
             transactions = data.get("transactions", {})
             with open("response.json", "w") as f:
                 json.dump(transactions, f, indent=4)
-            return {"transactions": transactions}
+            
+            # testing
+            months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+            allBudgets = []
+            for transaction in transactions:
+                allBudgets.append(getOneMonthBudget(transaction[months[today.month - 1]]))
+            return {"allBudgets": allBudgets}
         else:
             return {"error": "Failed to fetch transactions", "status": response.status_code}, response.status_code
     except Exception as e:
