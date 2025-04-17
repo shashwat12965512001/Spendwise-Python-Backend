@@ -23,6 +23,7 @@ def deploy():
     if token != DEPLOY_SECRET:
         return jsonify({"error": "Unauthorized"}), 403
     try:
+        print('asdf')
         # Git pull command
         result = subprocess.run(
             ["git", "pull"],
