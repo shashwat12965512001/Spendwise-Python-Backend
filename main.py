@@ -4,7 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-path = f"{os.getcwd()}/spendwise/"
+path = f"{os.getcwd()}/"
 
 # Configure logging
 logging.basicConfig(
