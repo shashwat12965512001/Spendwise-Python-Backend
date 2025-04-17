@@ -156,7 +156,10 @@ def getOneMonthBudget(transactions):
 
 @app.route('/getSuggestions')
 def getSuggestions():
-    return "getSuggestions"
+    return {
+        "status": True,
+        "message": "Suggestions fetched successfully",
+    }
 
 @app.route('/getMonthlyBudget', methods=['POST'])
 def get_monthly_budget():
