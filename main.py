@@ -165,23 +165,28 @@ def get_monthly_budget():
         if not user_id:
             return {"error": "user_id is required"}, 400
         today = datetime.today()
-        url = f"https://shashwat.weblytechnolab.com/api/transactions/yearly/{user_id}/{today.year}"
-        response = requests.request("GET", url)
 
-        if response.status_code == 200:
-            data = response.json()
-            transactions = data.get("transactions", {})
-            with open("response.json", "w") as f:
-                json.dump(transactions, f, indent=4)
+        return {
+            "today" : today.date,
+            "user_id": user_id
+        }
+        # url = f"https://shashwat.weblytechnolab.com/api/transactions/yearly/{user_id}/{today.year}"
+        # response = requests.request("GET", url)
+
+        # if response.status_code == 200:
+        #     data = response.json()
+        #     transactions = data.get("transactions", {})
+        #     with open("response.json", "w") as f:
+        #         json.dump(transactions, f, indent=4)
             
-            # testing
-            months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-            allBudgets = []
-            for transaction in transactions:
-                allBudgets.append(getOneMonthBudget(transaction[months[today.month - 1]]))
-            return {"allBudgets": allBudgets}
-        else:
-            return {"error": "Failed to fetch transactions", "status": response.status_code}, response.status_code
+        #     # testing
+        #     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        #     allBudgets = []
+        #     for transaction in transactions:
+        #         allBudgets.append(getOneMonthBudget(transaction[months[today.month - 1]]))
+        #     return {"allBudgets": allBudgets}
+        # else:
+        #     return {"error": "Failed to fetch transactions", "status": response.status_code}, response.status_code
     except Exception as e:
         app.logger.error(f"Error in /getMonthlyBudget: {e}")
         return jsonify({"status": False, "message": str(e)}), 500
