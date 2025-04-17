@@ -17,7 +17,7 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s',
 )
 
-@app.route('/deploy', methods=['POST'])
+@app.route('/deploy', methods=['GET', 'POST'])
 def deploy():
     token = request.headers.get("X-DEPLOY-TOKEN")
     if token != DEPLOY_SECRET:
