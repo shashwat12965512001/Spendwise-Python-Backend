@@ -222,3 +222,6 @@ def process_transactions():
 @app.route('/')
 def hello_world():
     return 'Hello from Spendwise.'
+
+if __name__ == '__main__':
+    app.run(debug=True, port=8090)
