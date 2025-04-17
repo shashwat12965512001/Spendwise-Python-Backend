@@ -154,7 +154,7 @@ def getOneMonthBudget(transactions):
     budget = savings * 0.5
     return budget
 
-@app.route('/getSuggestions')
+@app.route('/getSuggestions', methods=['GET'])
 def getSuggestions():
     return {
         "status": True,
