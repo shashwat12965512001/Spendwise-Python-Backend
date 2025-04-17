@@ -27,7 +27,7 @@ def deploy():
         # Git pull command
         result = subprocess.run(
             ["git", "pull"],
-            cwd="/home/weblytechnolab-backend/htdocs/backend.weblytechnolab.com/Spendwise-Python-Backend",
+            cwd="/Spendwise-Python-Backend",
             capture_output=True,
             text=True
         )
