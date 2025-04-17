@@ -26,7 +26,6 @@ def deploy():
         # Git pull command
         result = subprocess.run(
             ["git", "pull"],
-            cwd="/Spendwise-Python-Backend",
             capture_output=True,
             text=True
         )
