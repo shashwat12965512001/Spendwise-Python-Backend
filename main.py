@@ -224,37 +224,37 @@ def process_transactions():
 
         # ================================================
 
-        # Client ID and Client Secret
-        client_id = "free_tier_shashwat_f528f71e9c"
-        client_secret = "a08fa2e82f164bb2ab31424dd59e913b"
+        # # Client ID and Client Secret
+        # client_id = "free_tier_shashwat_f528f71e9c"
+        # client_secret = "a08fa2e82f164bb2ab31424dd59e913b"
 
-        # Get auth token
-        # access_token = auth_token_api(client_id, client_secret)
-        access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjMzMjg4OTQzMzYyNjM2MDk3IiwiaWF0IjoxNjY3NjI1MzM0LCJleHAiOjE2Njg3MjMzMzR9.Ec0YBxX8i5nZ7tMf7xYH3fHtXwKXHj6SgBx2KkXx1f8"
+        # # Get auth token
+        # # access_token = auth_token_api(client_id, client_secret)
+        # access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjMzMjg4OTQzMzYyNjM2MDk3IiwiaWF0IjoxNjY3NjI1MzM0LCJleHAiOjE2Njg3MjMzMzR9.Ec0YBxX8i5nZ7tMf7xYH3fHtXwKXHj6SgBx2KkXx1f8"
 
-        # Get data
-        file = open(path + 'data.json')
-        full_data = json.load(file)
-        # data = full_data[:500]  # Get only the first 500 records
+        # # Get data
+        # file = open(path + 'data.json')
+        # full_data = json.load(file)
+        # # data = full_data[:500]  # Get only the first 500 records
 
-        # Step 3: Get receiver's name
-        if access_token:
-            for transaction in full_data:
-                if 'upi_id' in transaction:
-                    # name = get_receivers_name(transaction['upi_id'], access_token, client_secret)
-                    name = "Shashwat Srivastava"
-                    if name:
-                        print(f"Receiver's Name: {name}")
-                        transaction['name'] = name
-                        transaction['expense_type'] = assign_expense_type(name)
-                    else:
-                        print("Failed to retrieve receiver's name.")
-                else:
-                    print("No UPI ID found in transaction.")
-        else:
-            print("Failed to retrieve auth token.")
+        # # Step 3: Get receiver's name
+        # if access_token:
+        #     for transaction in full_data:
+        #         if 'upi_id' in transaction:
+        #             # name = get_receivers_name(transaction['upi_id'], access_token, client_secret)
+        #             name = "Shashwat Srivastava"
+        #             if name:
+        #                 print(f"Receiver's Name: {name}")
+        #                 transaction['name'] = name
+        #                 transaction['expense_type'] = assign_expense_type(name)
+        #             else:
+        #                 print("Failed to retrieve receiver's name.")
+        #         else:
+        #             print("No UPI ID found in transaction.")
+        # else:
+        #     print("Failed to retrieve auth token.")
 
-        file.close()
+        # file.close()
 
         # ================================================
 
