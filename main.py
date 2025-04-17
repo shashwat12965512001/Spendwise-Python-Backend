@@ -1,10 +1,14 @@
 import logging, json, os, http, requests
+import subprocess
 from flask import Flask, jsonify, request
+from dotenv import load_dotenv
 from datetime import datetime
 
 app = Flask(__name__)
-
 path = f"{os.getcwd()}/"
+
+load_dotenv()
+DEPLOY_SECRET = os.getenv("DEPLOY_SECRET")
 
 # Configure logging
 logging.basicConfig(
@@ -12,6 +16,18 @@ logging.basicConfig(
     filename=f"{path}newfile.log",
     format='%(asctime)s %(levelname)s %(message)s',
 )
+
+@app.route('/deploy', methods=['POST'])
+def deploy():
+    token = request.headers.get("X-DEPLOY-TOKEN")
+    if token != DEPLOY_SECRET:
+        return jsonify({"error": "Unauthorized"}), 403
+    try:
+        subprocess.run(["git", "pull"], cwd="/home/weblytechnolab-backend/htdocs/backend.weblytechnolab.com/Spendwise-Python-Backend/")
+        subprocess.run(["sudo", "systemctl", "restart", "spendwise.service"])
+        return jsonify({"status": "Updated & restarted"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Function to fetch the receiver's name
 def get_receivers_name(upi_id, auth_token, client_secret):
