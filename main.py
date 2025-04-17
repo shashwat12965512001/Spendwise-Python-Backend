@@ -34,7 +34,7 @@ def deploy():
         return jsonify({"message": "Deployment triggered!", "output": result.stdout})
     except Exception as e:
         logging.error(f"Deploy failed: {e}")
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e.message)}), 500
 
 # Function to fetch the receiver's name
 def get_receivers_name(upi_id, auth_token, client_secret):
