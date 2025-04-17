@@ -17,7 +17,7 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s',
 )
 
-@app.route('/deploy', methods=['GET', 'POST'])
+@app.route('/deploy', methods=['POST'])
 def deploy():
     token = request.headers.get("X-DEPLOY-TOKEN")
     if token != DEPLOY_SECRET:
@@ -34,7 +34,7 @@ def deploy():
         return jsonify({"message": "Deployment triggered!", "output": result.stdout})
     except Exception as e:
         logging.error(f"Deploy failed: {e}")
-        return jsonify({"error": str(e.message)}), 500
+        return jsonify({"error": str(e)}), 500
 
 # Function to fetch the receiver's name
 def get_receivers_name(upi_id, auth_token, client_secret):
