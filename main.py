@@ -142,6 +142,18 @@ def extract_transaction_details(message):
 def assign_expense_type():
     pass
 
+def getOneMonthBudget(transactions):
+    totalIncome = 0
+    totalExpense = 0
+    for transaction in transactions:
+        if transaction["category"] == "Income":
+            totalIncome += transaction["amount"]
+        else:
+            totalExpense += transaction["amount"]
+    savings = totalIncome - totalExpense
+    budget = savings * 0.5
+    return budget
+
 @app.route('/getSuggestions')
 def getSuggestions():
     pass
