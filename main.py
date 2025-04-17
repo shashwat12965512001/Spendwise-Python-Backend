@@ -23,10 +23,17 @@ def deploy():
     if token != DEPLOY_SECRET:
         return jsonify({"error": "Unauthorized"}), 403
     try:
-        subprocess.run(["git", "pull"], cwd="/home/weblytechnolab-backend/htdocs/backend.weblytechnolab.com/Spendwise-Python-Backend/")
-        subprocess.run(["sudo", "systemctl", "restart", "spendwise.service"])
-        return jsonify({"status": "Updated & restarted"}), 200
+        # Git pull command
+        result = subprocess.run(
+            ["git", "pull"],
+            cwd="/home/weblytechnolab-backend/htdocs/backend.weblytechnolab.com/Spendwise-Python-Backend",
+            capture_output=True,
+            text=True
+        )
+        logging.info(f"Deploy triggered: {result.stdout}")
+        return jsonify({"message": "Deployment triggered!", "output": result.stdout})
     except Exception as e:
+        logging.error(f"Deploy failed: {e}")
         return jsonify({"error": str(e)}), 500
 
 # Function to fetch the receiver's name
