@@ -148,17 +148,12 @@ def extract_transaction_details(message):
 def assign_expense_type():
     pass
 
-def getOneMonthBudget(transactions):
+def getTotalIncome(transactions):
     totalIncome = 0
-    totalExpense = 0
     for transaction in transactions:
         if transaction["category"] == "Income":
             totalIncome += transaction["amount"]
-        else:
-            totalExpense += transaction["amount"]
-    savings = totalIncome - totalExpense
-    budget = savings * 0.5
-    return budget
+    return totalIncome
 
 @app.route('/getSuggestions', methods=['GET'])
 def getSuggestions():
@@ -177,15 +172,15 @@ def get_monthly_budget():
             "status": True,
             "message": "Budget fetched successfully",
         }
-        # today = datetime.today()
-        # url = f"https://shashwat.weblytechnolab.com/api/transactions/yearly/{user_id}/{today.year}"
-        # response = requests.request("GET", url)
+        today = datetime.today()
+        url = f"https://shashwat.weblytechnolab.com/api/transactions/yearly/{user_id}/{today.year}"
+        response = requests.request("GET", url)
 
-        # if response.status_code == 200:
-        #     data = response.json()
-        #     transactions = data.get("transactions", {})
-        #     with open("response.json", "w") as f:
-        #         json.dump(transactions, f, indent=4)
+        if response.status_code == 200:
+            data = response.json()
+            transactions = data.get("transactions", {})
+            with open("response.json", "w") as f:
+                json.dump(transactions, f, indent=4)
             
         #     # testing
         #     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
