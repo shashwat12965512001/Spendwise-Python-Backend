@@ -5,12 +5,22 @@ on:
     branches:
       - main  # or your actual deploy branch
 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📡 Call Deploy Endpoint on VPS
-        run: |
-          curl -X POST http://backend.weblytechnolab.com/deploy \
-            -H "X-DEPLOY-TOKEN: ${{ secrets.DEPLOY_SECRET }}"
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: SSH into Server 1 and Run Commands
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.SERVER_PASSWORDS }}
+        port: 65002
+        script: |
+          echo "Running commands on Server 1"
+          cd /home/weblytechnolab-backend/htdocs/backend.weblytechnolab.com/Spendwise-Python-Backend/ && git pull && git reset --hard FETCH_HEAD 2>&1
