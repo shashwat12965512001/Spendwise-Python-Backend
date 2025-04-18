@@ -1,14 +1,9 @@
 import logging, json, os, http, requests
-import subprocess
 from flask import Flask, jsonify, request
-from dotenv import load_dotenv
 from datetime import datetime
 
 app = Flask(__name__)
 path = f"{os.getcwd()}/"
-
-load_dotenv()
-DEPLOY_SECRET = os.getenv("DEPLOY_SECRET")
 
 # Configure logging
 logging.basicConfig(
@@ -16,24 +11,6 @@ logging.basicConfig(
     filename=f"{path}newfile.log",
     format='%(asctime)s %(levelname)s %(message)s',
 )
-
-@app.route('/deploy', methods=['POST'])
-def deploy():
-    token = request.headers.get("X-DEPLOY-TOKEN")
-    if token != DEPLOY_SECRET:
-        return jsonify({"error": "Unauthorized"}), 403
-    try:
-        # Git pull command
-        result = subprocess.run(
-            ["git", "pull"],
-            capture_output=True,
-            text=True
-        )
-        logging.info(f"Deploy triggered: {result.stdout}")
-        return jsonify({"message": "Deployment triggered!", "output": result.stdout})
-    except Exception as e:
-        logging.error(f"Deploy failed: {e}")
-        return jsonify({"error": str(e)}), 500
 
 # Function to fetch the receiver's name
 def get_receivers_name(upi_id, auth_token, client_secret):
