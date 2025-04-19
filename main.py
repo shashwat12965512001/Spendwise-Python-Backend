@@ -132,6 +132,13 @@ def getTotalIncome(transactions):
             totalIncome += transaction["amount"]
     return totalIncome
 
+def getTotalExpense(transactions):
+    totalExpense = 0
+    for transaction in transactions:
+        if transaction["category"] == "Expense":
+            totalExpense += transaction["amount"]
+    return totalExpense
+
 @app.route('/getSuggestions', methods=['GET'])
 def getSuggestions():
     return {
@@ -158,7 +165,7 @@ def get_monthly_budget():
             transactions = data.get("transactions", {})
             with open("response.json", "w") as f:
                 json.dump(transactions, f, indent=4)
-            
+
         #     # testing
         #     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         #     allBudgets = []
