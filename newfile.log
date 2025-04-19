@@ -1,3 +1,9 @@
 2025-04-19 06:27:25,383 WARNING  * Debugger is active!
 2025-04-19 06:27:25,391 INFO  * Debugger PIN: 317-110-586
 2025-04-19 06:58:52,673 INFO 127.0.0.1 - - [19/Apr/2025 06:58:52] "GET /getSuggestions HTTP/1.1" 200 -
+2025-04-19 07:31:21,302 INFO  * Detected change in '/home/weblytechnolab-backend/htdocs/backend.weblytechnolab.com/Spendwise-Python-Backend/main.py', reloading
+2025-04-19 07:31:21,778 WARNING  * Debugger is active!
+2025-04-19 07:31:21,792 INFO  * Debugger PIN: 317-110-586
+2025-04-19 07:31:50,923 INFO  * Detected change in '/home/weblytechnolab-backend/htdocs/backend.weblytechnolab.com/Spendwise-Python-Backend/main.py', reloading
+2025-04-19 07:31:51,213 WARNING  * Debugger is active!
+2025-04-19 07:31:51,216 INFO  * Debugger PIN: 317-110-586
